@@ -1,11 +1,12 @@
 "use client"
 
-import { Button } from "@/components/ui/button"
+import {  buttonVariants } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Menu, X } from "lucide-react"
 import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
+import { RegisterLink, LoginLink } from "@kinde-oss/kinde-auth-nextjs/components";
 
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -15,28 +16,26 @@ export function Navbar() {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-        <Link href="/" className="flex items-center space-x-2">
+          <Link href="/" className="flex items-center space-x-2">
 
-          <div className="flex items-center space-x-2">
-            <Image
-            src={"/logo.png"}
-            alt="Seentimo Logo"
-            width={48}
-            height={48}
-            />
+            <div className="flex items-center space-x-2">
+              <Image
+                src={"/logo.png"}
+                alt="Seentimo Logo"
+                width={48}
+                height={48}
+              />
 
-            <span className="font-[family-name:var(--font-playfair)] text-xl font-bold text-foreground">SeenTimo</span>
-            <Badge variant="outline" className="hidden sm:inline-flex text-xs">
-              Beta
-            </Badge>
-          </div>
+              <span className="font-[family-name:var(--font-playfair)] text-xl font-bold text-foreground">SeenTimo</span>
+              <Badge variant="outline" className="hidden sm:inline-flex text-xs">
+                Beta
+              </Badge>
+            </div>
           </Link>
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            <Button variant="outline" size="sm">
-              View Dashboard
-            </Button>
-            <Button size="sm">Try Platform</Button>
+          <div className="hidden md:flex items-center space-x-4">
+            <RegisterLink className={buttonVariants({ variant: "outline" })}>Try Platform</RegisterLink>
+            <LoginLink className={buttonVariants()}>Sign in</LoginLink>
           </div>
 
           {/* Mobile Menu Button */}
@@ -53,10 +52,8 @@ export function Navbar() {
           <div className="md:hidden py-4 border-t border-border">
             <div className="flex flex-col space-y-4">
               <div className="flex flex-col space-y-2 pt-2">
-                <Button variant="outline" size="sm">
-                  View Dashboard
-                </Button>
-                <Button size="sm">Try Platform</Button>
+                <RegisterLink className={buttonVariants({ variant: "outline" })}>Try Platform</RegisterLink>
+                <LoginLink className={buttonVariants()}>Sign in</LoginLink>
               </div>
             </div>
           </div>

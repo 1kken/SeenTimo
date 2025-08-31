@@ -1,5 +1,8 @@
-import { Button } from "@/components/ui/button"
+import { buttonVariants } from "@/components/ui/button"
+import { RegisterLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import { ArrowRight } from "lucide-react"
+import Link from "next/link";
+import { twMerge } from "tailwind-merge";
 
 export function CTASection() {
   return (
@@ -14,17 +17,14 @@ export function CTASection() {
             tracked and verified.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" variant="secondary" className="bg-background text-foreground hover:bg-background/90">
-              Start with ₱1M Mock Budget
+
+            <RegisterLink className={twMerge(buttonVariants({ variant: "secondary",size:"lg" }), "bg-background text-foreground hover:bg-background/90")}>
               <ArrowRight className="ml-2 h-5 w-5" />
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-accent-foreground/30 text-accent-foreground hover:bg-accent-foreground/10 bg-transparent"
-            >
+              Start with ₱1M Mock Budget
+            </RegisterLink>
+            <Link href="/dashboard" className={twMerge(buttonVariants({ variant: "outline",size:"lg" }), "border-accent-foreground/30 text-accent-foreground hover:bg-accent-foreground/10 bg-transparent flex items-center justify-center")}>
               View Public Dashboard
-            </Button>
+            </Link>
           </div>
         </div>
       </div>

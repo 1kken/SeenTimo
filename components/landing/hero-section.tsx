@@ -1,6 +1,9 @@
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { ArrowRight } from "lucide-react"
+import { Button , buttonVariants} from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { ArrowRight } from "lucide-react";
+import { RegisterLink } from "@kinde-oss/kinde-auth-nextjs/components";
+import { twMerge } from "tailwind-merge";
+import Link from "next/link";
 
 export function HeroSection() {
   return (
@@ -18,17 +21,13 @@ export function HeroSection() {
             trustworthy, and publicly auditable.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" variant="secondary" className="bg-accent hover:bg-accent/90 text-accent-foreground">
+            <RegisterLink className={twMerge(buttonVariants({ variant: "secondary",size:"lg" }), "bg-accent text-foreground hover:bg-background/90")}>
               Try the Platform
               <ArrowRight className="ml-2 h-5 w-5" />
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 bg-transparent"
-            >
-              View Transparency Dashboard
-            </Button>
+            </RegisterLink>
+            <Link href="/dashboard" className={twMerge(buttonVariants({ variant: "outline",size:"lg" }), "border-accent-foreground/30 text-accent-foreground hover:bg-accent-foreground/10 bg-transparent flex items-center justify-center")}>
+              View Public Dashboard
+            </Link>
           </div>
         </div>
       </div>
