@@ -1,4 +1,4 @@
-import { Button , buttonVariants} from "@/components/ui/button";
+import {  buttonVariants} from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ArrowRight } from "lucide-react";
 import { RegisterLink } from "@kinde-oss/kinde-auth-nextjs/components";

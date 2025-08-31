@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Playfair_Display } from "next/font/google"
 import "./globals.css";
+import { AuthProvider } from "@/components/general/auth-provider";
 
 const playfairDisplay = Playfair_Display({
   subsets: ["latin"],
@@ -31,12 +32,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} ${playfairDisplay.variable} antialiased`}
-      >
-        {children}
-      </body>
-    </html>
+    <AuthProvider>
+      <html lang="en">
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} ${playfairDisplay.variable} antialiased`}
+        >
+          {children}
+        </body>
+      </html>
+    </AuthProvider>
   );
 }
