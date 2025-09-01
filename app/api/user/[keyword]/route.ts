@@ -19,7 +19,7 @@ export async function GET(request: Request, { params }: { params: Params }) {
 
         const users = await prisma.user.findMany({
             where: {
-                name: {
+                userName: {
                     contains: keyword,
                     mode: 'insensitive', // case-insensitive search
                 },
@@ -27,7 +27,7 @@ export async function GET(request: Request, { params }: { params: Params }) {
             take: 10, // limit to 10 results
             select: {
                 id: true,
-                name: true,
+                userName: true,
             },
         })
 

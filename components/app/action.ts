@@ -7,7 +7,6 @@ export default async function sendMoney(initialState: unknown,formData: FormData
 
     console.log(formData.get("amount"));
     console.log(formData.get("receiverId"));
-    return { message: "Server action executed!" };
 
     const receiverId = formData.get("receiverId") as string
     const amount = Number(formData.get("amount"))
@@ -73,4 +72,5 @@ export default async function sendMoney(initialState: unknown,formData: FormData
     })
 
     revalidatePath('/app');
+    return { message: 'Transaction successful' }
 }

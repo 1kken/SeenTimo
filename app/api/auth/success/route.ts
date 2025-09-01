@@ -1,6 +1,7 @@
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
+import { generateFromEmail } from "unique-username-generator";
 
 export async function GET() {
   try {
@@ -18,10 +19,11 @@ export async function GET() {
 
 
     if (!existingUser) {
+      // Generate a unique username based on the user's email
       await prisma.user.create({
         data: {
           id: user.id,
-          name: user.given_name || "No Name",
+          userName: generateFromEmail(user.email || "unknown_user@unknown.com",4),
         }
       });
     }

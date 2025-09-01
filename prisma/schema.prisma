@@ -12,7 +12,7 @@ datasource db {
 
 model User {
   id        String   @id 
-  name      String
+  userName      String @unique
   balance Float @default(1000000) // Default balance of 1,000,000
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
