@@ -4,14 +4,21 @@ import { buttonVariants } from "@/components/ui/button"
 
 type Props = {
     isAuthenticated?: boolean | null;
+    userName: string | null;
 };
-export function NavAuthButtons({isAuthenticated}: Props) {
+export function NavAuthButtons({ isAuthenticated, userName }: Props) {
     return (
         <>
             {isAuthenticated ? (
-                <LogoutLink className={buttonVariants({ variant: "destructive" })}>
-                    Logout
-                </LogoutLink>
+                <div className="flex items-center justify-between w-full gap-2">
+                    <h1>
+                        Username: <span className=" font-bold">{userName}</span>
+                    </h1>
+                    <LogoutLink className={buttonVariants({ variant: "destructive" })}>
+                        Logout
+                    </LogoutLink>
+                </div>
+
             ) : (
                 <>
                     <RegisterLink className={buttonVariants({ variant: "outline" })}>Try Platform</RegisterLink>

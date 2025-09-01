@@ -6,11 +6,12 @@ import Image from "next/image"
 import Link from "next/link"
 import { NavAuthButtons } from "../general/nav-auth-buttons"
 
-type NavMenuProps = {   
+type NavMenuProps = {
     isAuthenticated?: boolean | null;
+    userName: string | null;
 };
 
-export function NavMenu({isAuthenticated}: NavMenuProps) {
+export function NavMenu({ isAuthenticated, userName }: NavMenuProps) {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     return (
         <div className="container mx-auto px-4">
@@ -34,7 +35,7 @@ export function NavMenu({isAuthenticated}: NavMenuProps) {
                 </Link>
                 {/* Desktop Navigation */}
                 <div className="hidden md:flex items-center space-x-4">
-                    <NavAuthButtons isAuthenticated={isAuthenticated} />
+                    <NavAuthButtons isAuthenticated={isAuthenticated} userName={userName} />
                 </div>
 
                 {/* Mobile Menu Button */}
@@ -51,7 +52,7 @@ export function NavMenu({isAuthenticated}: NavMenuProps) {
                 <div className="md:hidden py-4 border-t border-border">
                     <div className="flex flex-col space-y-4">
                         <div className="flex flex-col space-y-2 pt-2">
-                            <NavAuthButtons isAuthenticated={isAuthenticated}/>
+                            <NavAuthButtons isAuthenticated={isAuthenticated} userName={userName} />
                         </div>
                     </div>
                 </div>
