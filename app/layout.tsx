@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { Playfair_Display } from "next/font/google"
 import "./globals.css";
 import { AuthProvider } from "@/components/general/auth-provider";
+import { Navbar } from "@/components/landing/nav-bar";
 
 const playfairDisplay = Playfair_Display({
   subsets: ["latin"],
@@ -36,7 +37,8 @@ export default function RootLayout({
       <html lang="en">
         <body
           className={`${geistSans.variable} ${geistMono.variable} ${playfairDisplay.variable} antialiased`}
-        >
+        >   
+          <Navbar />
           {children}
         </body>
       </html>

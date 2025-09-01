@@ -1,8 +1,10 @@
 export default function AppPage() {
     return (
-    <div className="min-h-screen bg-background">
-
-        <h1>Hello world</h1>
-    </div>
+        <div className="min-h-screen bg-background">
+            <main className="flex flex-col items-center justify-center py-8 px-4 mt-16">
+                <h1>Hello world</h1>
+                <h1>Welcome to transparent dashboard</h1>
+            </main>
+        </div>
     )
 }
