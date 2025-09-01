@@ -2,6 +2,7 @@ import prisma from "@/lib/prisma";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server"
 import { unauthorized } from "next/navigation";
 import { FinanceCardWrapper } from "./components/finance-card";
+import SendForm from "./components/forms/send-form";
 
 async function getData() {
     const { getUser } = await getKindeServerSession();
@@ -43,6 +44,7 @@ export default async function AppPage() {
                 totalSentProp={data.totalSent}
                 totalReceivedProp={data.totalReceived}
             />
+            <SendForm />
         </div>
     )
 }
