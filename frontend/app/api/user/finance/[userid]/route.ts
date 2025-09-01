@@ -3,12 +3,14 @@ import { NextResponse } from "next/server"
 import prisma from "@/lib/prisma"
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server"
 
+type Params = Promise<{userid: string}>
+
 export async function GET(
     req: Request,
-    { params }: { params: { userid: string } }
+    { params }: { params: Params }
 ) {
     try {
-        const { userid } = params
+        const { userid } = await params;
         const {getUser} = getKindeServerSession()
 
         const userFromSession = await getUser();

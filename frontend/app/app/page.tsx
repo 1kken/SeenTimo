@@ -1,17 +1,22 @@
 import prisma from "@/lib/prisma";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server"
-import { unauthorized } from "next/navigation";
 import { BalanceCards } from "@/components/app/balance-cards";
 import { TransparencyNotice } from "@/components/app/transparency-notice";
-import {SendForm} from "@/components/app/send-form"
+import { SendForm } from "@/components/app/send-form"
 async function getData() {
     const { getUser } = await getKindeServerSession();
 
     const user = await getUser();
-    if (!user) return unauthorized();
-    const userid = user.id;
+    if (!user) {
+        return {
+            balance: 0,
+            totalSent: 0,
+            totalReceived: 0,
+        };
+    }
 
     // Get user balance
+    const userid = user.id;
     const userDb = await prisma.user.findUnique({
         where: { id: userid },
         select: { balance: true },
