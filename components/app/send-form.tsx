@@ -20,12 +20,24 @@ interface User {
     userName: string;
 }
 
-const loadUsers = async (inputValue: string): Promise<UserOption[]> => {
-    if (!inputValue) return [];
-    const res = await fetch(`/api/user/${inputValue}`);
-    const data = await res.json();
-    return data.users.map((u: User) => ({ value: u.id, label: u.userName }));
-};
+//debounce with history
+const loadUsers = (() => {
+    let requestCounter = 0;
+
+    return async (inputValue: string): Promise<UserOption[]> => {
+        if (!inputValue) return [];
+        const currentRequest = ++requestCounter;
+
+        const res = await fetch(`/api/user/${inputValue}`);
+        const data = await res.json();
+
+        // Only return results if this is the latest request
+        if (currentRequest === requestCounter) {
+            return data.users.map((u: User) => ({ value: u.id, label: u.userName }));
+        }
+        return [];
+    };
+})();
 
 const initialState = { message: "" };
 
@@ -59,8 +71,8 @@ export function SendForm() {
                                 loadOptions={loadUsers}
                                 onChange={(option) => setSelectedUser(option as UserOption)}
                                 value={selectedUser}
-                                placeholder="Search user..."
-                                className="w-full" // outer wrapper full width
+                                placeholder="Search user name..."
+                                className="w-full" 
                                 classNames={{
                                     control: (state) =>
                                         `w-full border rounded-md p-1 ${state.isFocused ? 'border-blue-600' : 'border-gray-300'}`,
