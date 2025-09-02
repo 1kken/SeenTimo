@@ -4,6 +4,8 @@ import { useState } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import Link from "next/link"
+import { SquareArrowOutUpRight } from "lucide-react"
 
 interface Transaction {
   from: string
@@ -13,11 +15,11 @@ interface Transaction {
   blockHash: string
 }
 
-interface Props{
-    transactions: Transaction[];
+interface Props {
+  transactions: Transaction[];
 }
 
-export function TransactionsTable({transactions}: Props) {
+export function TransactionsTable({ transactions }: Props) {
   const [showCount, setShowCount] = useState(10)
 
 
@@ -46,7 +48,12 @@ export function TransactionsTable({transactions}: Props) {
     <Card>
       <CardHeader>
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-          <CardTitle className="text-xl font-semibold text-gray-900">Latest Transactions</CardTitle>
+          <CardTitle className="text-xl font-semibold text-gray-900">
+            Latest Transactions <Link href="https://sepolia.etherscan.io/address/0xA8713f2731FFbCc1bDbF1faeBb6a4F712B4a1787" target="_blank" rel="noopener noreferrer" className="text-blue-400 text-sm hover:underline ml-1 inline-flex items-center">
+              visit etherscan <SquareArrowOutUpRight size={12} />
+            </Link>
+          </CardTitle>
+
           <div className="flex items-center gap-2">
             <Label htmlFor="show-count" className="text-sm font-medium">
               Show:
