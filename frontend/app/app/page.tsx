@@ -3,6 +3,7 @@ import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server"
 import { BalanceCards } from "@/components/app/balance-cards";
 import { TransparencyNotice } from "@/components/app/transparency-notice";
 import { SendForm } from "@/components/app/send-form"
+import { AppHeader } from "@/components/app/app-header";
 async function getData() {
     const { getUser } = await getKindeServerSession();
 
@@ -43,7 +44,8 @@ async function getData() {
 export default async function AppPage() {
     const data = await getData();
     return (
-        <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 mt-12">
+        <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 mt-16">
+            <AppHeader title="App Dashboard" subtitle="Manage your government fund transactions" />
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
                 <BalanceCards balance={data.balance} totalSent={data.totalSent} totalReceived={data.totalReceived} />
 
