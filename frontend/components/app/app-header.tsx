@@ -22,7 +22,7 @@ export function AppHeader({ title, subtitle}: DashboardHeaderProps) {
               </Button>
             </Link>
             <div className="text-right">
-              <p className="text-sm text-slate-500">Last transaction</p>
+              <p className="text-sm text-slate-500">Current Time:</p>
               <p className="text-sm font-medium text-slate-700">{new Date().toLocaleString()}</p>
             </div>
           </div>
