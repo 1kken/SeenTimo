@@ -1,4 +1,4 @@
-import { createWalletClient, createPublicClient, http, Hex } from "viem";
+import { createWalletClient,  http, Hex } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
 import { defineChain } from "viem";
 import TransactionStorageJson from "./TransactionStorage.json";
@@ -21,28 +21,19 @@ const walletClient = createWalletClient({
   transport: http(process.env.JSON_RPC_PROVIDER_URL!),
 });
 
-// 3. Public client (for reads/simulation)
-const publicClient = createPublicClient({
-  chain,
-  transport: http(process.env.JSON_RPC_PROVIDER_URL!),
-});
 
 export async function savePaymentToBlockChain(
   sender: string,
   receiver: string,
   amount: number
 ) {
-  // simulate first as per documentation
-  const { request } = await publicClient.simulateContract({
+  // send txn directly
+  const hash = await walletClient.writeContract({
     address: process.env.CONTRACT_ADDRESS! as Hex,
     abi,
     functionName: "savePayment",
-    args: [sender, receiver, amount],
-    account: account.address,
+    args: [sender, receiver, BigInt(amount)], // Viem prefers BigInt for uint256
   });
-
-  // send txn
-  const hash = await walletClient.writeContract(request);
 
   return hash;
 }
