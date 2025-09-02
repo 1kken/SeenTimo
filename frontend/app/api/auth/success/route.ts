@@ -1,7 +1,7 @@
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
-import { generateFromEmail } from "unique-username-generator";
+import { generateUsername } from "unique-username-generator";
 
 export async function GET() {
   try {
@@ -23,12 +23,12 @@ export async function GET() {
       await prisma.user.create({
         data: {
           id: user.id,
-          userName: generateFromEmail(user.email || "unknown_user@unknown.com",4),
+          userName: generateUsername("",4),
         }
       });
     }
 
-    const redirectUrl = process.env.NEXT_PUBLIC_APP_URL ? new URL('/dashboard', process.env.NEXT_PUBLIC_APP_URL) : 'http://localhost:3000/dashboard';
+    const redirectUrl = process.env.NEXT_PUBLIC_APP_URL ? new URL('/app', process.env.NEXT_PUBLIC_APP_URL) : 'http://localhost:3000/app';
     return NextResponse.redirect(redirectUrl);
   } catch (error) {
     console.error('Error in authentication:', error);

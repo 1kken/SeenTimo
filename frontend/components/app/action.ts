@@ -2,6 +2,7 @@
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server"
 import prisma from "@/lib/prisma"
 import { revalidatePath } from "next/cache";
+import { savePaymentToBlockChain } from "@/lib/blockchain/blockhain";
 
 export default async function sendMoney(initialState: unknown,formData: FormData) {
 
@@ -44,6 +45,13 @@ export default async function sendMoney(initialState: unknown,formData: FormData
         // return NextResponse.json({ error: "Receiver not found" }, { status: 404 })
     }
 
+    //save payment to blockchain
+    const txnHash = await savePaymentToBlockChain(
+        sender.userName,
+        receiver.userName,
+        amount
+    )
+
     // Perform transaction atomically
     await prisma.$transaction(async (tx) => {
         // Deduct from sender
@@ -64,7 +72,7 @@ export default async function sendMoney(initialState: unknown,formData: FormData
                 senderId: userFromSession.id,
                 receiverId,
                 amount,
-                txnHash: "gibberish" // Placeholder, replace with actual hash if available
+                txnHash: txnHash // Placeholder, replace with actual hash if available
             }
         })
 

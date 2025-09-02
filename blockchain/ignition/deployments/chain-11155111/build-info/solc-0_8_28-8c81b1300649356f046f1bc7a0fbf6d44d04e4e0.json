@@ -1,0 +1,39 @@
+{
+  "_format": "hh3-sol-build-info-1",
+  "id": "solc-0_8_28-8c81b1300649356f046f1bc7a0fbf6d44d04e4e0",
+  "solcVersion": "0.8.28",
+  "solcLongVersion": "0.8.28+commit.7893614a",
+  "userSourceNameMap": {
+    "contracts/TransactionStorage.sol": "project/contracts/TransactionStorage.sol"
+  },
+  "input": {
+    "language": "Solidity",
+    "settings": {
+      "evmVersion": "cancun",
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "outputSelection": {
+        "*": {
+          "": [
+            "ast"
+          ],
+          "*": [
+            "abi",
+            "evm.bytecode",
+            "evm.deployedBytecode",
+            "evm.methodIdentifiers",
+            "metadata"
+          ]
+        }
+      },
+      "remappings": []
+    },
+    "sources": {
+      "project/contracts/TransactionStorage.sol": {
+        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.20;\r\n\r\ncontract TransactionStorage {\r\n    struct Payment {\r\n        string senderName;\r\n        string receiverName;\r\n        uint256 amount;\r\n    }\r\n\r\n    Payment[] public payments;\r\n\r\n    event PaymentSaved(string senderName, string receiverName, uint256 amount);\r\n\r\n    function savePayment(string calldata senderName, string calldata receiverName, uint256 amount) external {\r\n        payments.push(Payment(senderName, receiverName, amount));\r\n        emit PaymentSaved(senderName, receiverName, amount);\r\n    }\r\n\r\n    function getPayment(uint256 index) external view returns (string memory, string memory, uint256) {\r\n        Payment storage p = payments[index];\r\n        return (p.senderName, p.receiverName, p.amount);\r\n    }\r\n\r\n    function totalPayments() external view returns (uint256) {\r\n        return payments.length;\r\n    }\r\n}\r\n"
+      }
+    }
+  }
+}
