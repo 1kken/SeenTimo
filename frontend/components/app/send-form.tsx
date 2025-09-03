@@ -1,7 +1,6 @@
 'use client'
 
 import React, { useState } from "react";
-import AsyncSelect from "react-select/async";
 import sendMoney from "./action";
 import { useActionState } from "react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
@@ -9,6 +8,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { SendIcon } from "lucide-react";
+import dynamic from "next/dynamic";
+const AsyncSelect = dynamic(() => import("react-select/async"), { ssr: false })
 
 interface UserOption {
     value: string;
@@ -72,7 +73,7 @@ export function SendForm() {
                                 onChange={(option) => setSelectedUser(option as UserOption)}
                                 value={selectedUser}
                                 placeholder="Search user name..."
-                                className="w-full" 
+                                className="w-full"
                                 classNames={{
                                     control: (state) =>
                                         `w-full border rounded-md p-1 ${state.isFocused ? 'border-blue-600' : 'border-gray-300'}`,
@@ -81,11 +82,10 @@ export function SendForm() {
                                     singleValue: () => 'text-gray-900',
                                 }}
                             />
-                            <input
-                                type="hidden"
-                                name="receiverId"
-                                value={selectedUser?.value || ""}
-                            />
+                            {selectedUser && (
+                                <input type="hidden" name="receiverId" value={selectedUser.value} />
+                            )}
+
                         </div>
 
                         <div className="flex flex-col space-y-2">

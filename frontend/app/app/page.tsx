@@ -4,6 +4,7 @@ import { BalanceCards } from "@/components/app/balance-cards";
 import { TransparencyNotice } from "@/components/app/transparency-notice";
 import { SendForm } from "@/components/app/send-form"
 import { AppHeader } from "@/components/app/app-header";
+
 async function getData() {
     const { getUser } = await getKindeServerSession();
 
