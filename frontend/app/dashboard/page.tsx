@@ -51,6 +51,7 @@ export default async function DashboardPage() {
   const transactions = await getLatestTransactions(100);
   const { isAuthenticated } = getKindeServerSession();
   const authenticated = await isAuthenticated();
+
   return (
     <div className="min-h-screen bg-gray-50 mt-12">
       <div className="container mx-auto px-4 py-8">
